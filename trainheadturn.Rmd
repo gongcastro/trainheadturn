@@ -13,6 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ### Design
 
+* How should the datasets be labelled? for instance, sequential labelling (e.g., baby1, baby2, etc.), ID from database (e.g., 54633).
 * What data should the trainee performance be compared with?
 * How many datasets (from different proficient experimenters) should the trainee's performance be compared with?
 
@@ -44,7 +45,7 @@ $$ M_{error} = \frac{error_1 + error_2 + \dots + error_k}{k} $$
 
 * **Coincidence index**: Difference between reference's and trainee's measured looking times expressed as a proportion (e.g., 95%).
     
-$$index = (1 - \frac{t_{trainee}}{t_{reference}}) \times 100$$
+$$index = (1 - \frac{t_{trainee}}{t_{reference}})$$
     
 ### Should we use data from multiple measurements of the same infant to reliability/validity assessment?
 
@@ -57,3 +58,13 @@ $$index = (1 - \frac{t_{trainee}}{t_{reference}}) \times 100$$
 * Should we develop a click-based interface (GUI)?
 
 Easier to use when the trainee is unfamiliar with programming. However, in case code is needed, we would make it very user friendly (minimum coding skills required).
+
+## What I thought so far
+I have written a very simple R function `check()` that takes the ID of the baby/babies to be *checked* and produces a graph comparing the looking times measured by the trainee and the proficient experiment(ers). How to use the function:
+
+1. A proficient experimenter codes on-line an infant's looking times using WISP. Postprocessed data is stored in a folder. The output should be a `.txt` file named as follows: `id_ref.txt` where `id` is replaced by the infant's ID.
+2. The trainee codes looking times using from the video recorded by the previous experimenter. Postprocessed data is stored in the same folder as previously. The outout should be a `.txt` file named as follows: `id.txt` (same as previously deleting `_ref`).
+3. Open R, change working directory to the folder containing the two datasets. 4. Execute the `check()` function.
+5. In the console, write the following command: `check(id = babyid, graph = TRUE)`. replace `babyid` with the infant's ID. If data from several babies is to be analyzed simultaneously, write the command as follows: `check(id = c(babyid1, babyid2, ..., babyn), graph = TRUE)` where n is the last baby to be analyzed. Set `graph` to `graph = FALSE` if you do not want a graph as output.
+6. Execute the command and analyze the output.
+

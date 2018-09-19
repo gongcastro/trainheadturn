@@ -9,15 +9,13 @@
 
 check <-
   function(id, # baby/babies identifier/s (as character vector)
-           graph = TRUE){
+           graph = TRUE){ # should a graph be displayed?
     
     library(ggplot2) # data visualization
     library(magrittr) # data manipulation
     library(gridExtra) # data visualization
     
-    
     n <- length(id) # number of datasets to check
-    print(n)
     
     # import training dataset (postprocessed WISP .txt file)
     train.data <- list()
@@ -36,11 +34,7 @@ check <-
                    skip = 2,
                    colClasses = colClasses,
                    col.names = col.names) %>%
-        dplyr::filter(phase == 3)
-    }
-    
-    # store the training dataset in the global environment as "train"
-    assign("training_data.txt", train.data, envir = .GlobalEnv)
+        dplyr::filter(phase == 3)}
     
     # import training dataset (postprocessed WISP file)
     reference.data <- list()
@@ -56,9 +50,6 @@ check <-
                    col.names = col.names) %>%
         dplyr::filter(phase == 3)
     }
-      
-    # store the reference dataset in the global environment as "reference"
-    assign("reference_data.txt", reference.data, envir = .GlobalEnv)
     
     # calculate error
     time <- list()
@@ -74,12 +65,19 @@ check <-
         time[[i]] %>% tidyr::gather() %>% dplyr::filter(key == "reference" | key == "train")
       time.long[[i]]$trial <- time[[i]] %$% trial %>%  rep(., 2)
       time.long[[i]]$error <- time[[i]] %$% error %>% rep(., 2)
-      colnames(time.long[[i]]) <- c("dataset", "time", "trial", "error")
-      
-      }
-    "time" %>% assign(., time, envir = .GlobalEnv)
-    "time.long" %>% assign(., time.long, envir = .GlobalEnv)
+      colnames(time.long[[i]]) <- c("dataset", "time", "trial", "error")}
+    time %>% print
     
+    performance <- list()
+    for (i in 1:n) {performance[[i]] <- paste(id[[i]], 
+                                              "Mean error =",
+                                              time[[i]] %$% error %>% mean %>% round(., 2),
+                                              "ms,",
+                                              "accuracy =",
+                                              round(sum(time[[i]]$train)/sum(time[[i]]$reference), 2),
+                                              sep = " ")}
+    performance %>% print
+
     # plot looking time measured against trial number
     # comparing train vs. reference
     if(graph){
@@ -126,7 +124,6 @@ check <-
             scale_x_discrete("Trial") 
           
         }
-        
         else if (i == 1){ # if first graph, display legend
           graph[[i]] <- 
             ggplot(data = time.long[[i]]) +
@@ -199,7 +196,7 @@ check <-
             scale_x_discrete(NULL)
         }
       }
-    }
       do.call(grid.arrange, c(graph, list(ncol = 1)))
+    }
   }
         
