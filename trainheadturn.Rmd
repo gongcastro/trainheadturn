@@ -1,0 +1,59 @@
+---
+title: "Head-Turn Preference procedure training"
+author: "Gonzalo García-Castro"
+date: "15/9/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Issues
+
+### Design
+
+* What data should the trainee performance be compared with?
+* How many datasets (from different proficient experimenters) should the trainee's performance be compared with?
+
+The use of multiple reference datasets would provide a range of acceptable measurements from the trainee (some deviation from reference dataset should be permitted). The trainee's performance should be *within* the reference measurements to be considered as acceptable.
+
+* What infants should be selected to be part of the training? What criteria should be used?
+* What material should the trainees code from?
+
+New measurements based on an online-coded video could be artificially modified. For instance, stimuli duration should depend on trainee performance, but will actually depend on the looking time recorded by the previous experimenter (who coded the infant for the first time).
+
+### Measurements
+
+### What dependent variables should be assessed?
+
+* Available from WISP: Looking time, looking time to familiar/unfamiliar items, difference in looking time to familiar vs. unfamiliar items, prelook, postlook, looks away, etc.
+* Despite not being very meaningful by themselves (e.g., looks away), some measures could provide complementary information about the trainee's performance (e.g., number of times the trainee detected a no-look).
+    
+
+### How to measure precision?
+
+* **Raw error**: Difference between reference's and trainee's measured looking times (e.g., 1000 ms.).
+
+$$error = t_{reference} -
+t_{trainee}$$
+
+* **Mean error**: Mean difference between reference's and trainee's measured looking times across the *k* trials (e.g., 500 ms.).
+
+$$ M_{error} = \frac{error_1 + error_2 + \dots + error_k}{k} $$
+
+* **Coincidence index**: Difference between reference's and trainee's measured looking times expressed as a proportion (e.g., 95%).
+    
+$$index = (1 - \frac{t_{trainee}}{t_{reference}}) \times 100$$
+    
+### Should we use data from multiple measurements of the same infant to reliability/validity assessment?
+
+## Interface
+
+* What programming language should we write the code in?
+    + **Matlab**: *Pros*: same language as WISP, available in all computers in CBC. *Cons*: not open-source, codedifficult to be shared.
+    + **R**: *Pros*: open-source (access to the programm would be guaranteed for the trainee at home?), code easy to share. *Cons*: different language as WISP.
+    
+* Should we develop a click-based interface (GUI)?
+
+Easier to use when the trainee is unfamiliar with programming. However, in case code is needed, we would make it very user friendly (minimum coding skills required).
