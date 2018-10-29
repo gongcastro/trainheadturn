@@ -1,0 +1,29 @@
+---
+title: "Headturn-Preference Procedure training"
+author: "Gonzalo García-Castro & Chiara Santolin"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 1. Introduction
+
+### 1.1 What is the Head-Turn Preference Procedure?
+
+### 1.2 How is a HPP experiment designed?
+
+### 1.3 What kind of data do we get from HPP?
+
+### 1.4. Why is this training important?
+
+## 2. How the training works
+
+### 2.1 Off-line coding: registering looking times using WISP
+
+### 2.2 Checking your results using the `trainheadturn` R package
+
+### 2.3 Assessing your improvement
+
+## 3. Bibliography
